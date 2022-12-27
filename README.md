@@ -18,6 +18,7 @@ We can see the results of the run as shown below:
 ![main1](https://img-blog.csdnimg.cn/053086f687104e00bd9b8cd343974d14.png)  
 
 there are 9 main functions in the pipeline:     
+## 
     >1.picture division 
     Multiple objects on a single image can be segmented to obtain an image containing only a single object. 
     >>You need to enter the path to the folder where the image is located and the path to the output folder. The pipeline will determine the output folder and automatically create a new one if it does not exist.
