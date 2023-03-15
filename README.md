@@ -51,4 +51,4 @@ there are 9 main functions in the pipeline:
     >9.area ratio:    
     Calculate the overlap between the reconstructed profile and the original profile and output the overlap as a table.
     
-  10.exist：you can choose to exit the pipeline or continue running it   
+  10.exst：you can choose to exit the pipeline or continue running it   
