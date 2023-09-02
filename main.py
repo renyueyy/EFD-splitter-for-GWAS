@@ -5,33 +5,36 @@ def main():
     :return:
     """
     print('Please choose--------------')
-    print('1.picture division图片分割')
-    print('2.find contour获得轮廓')
-    print('3.resize面积均一')
-    print('4.rotation basid on average根据平均轮廓旋转矫正方向')
-    print('5.get average获得平均轮廓')
-    print('6.rotation basid on symmetric根据对称性旋转矫正方向')
-    print('7.efd求傅立叶系数')
-    print('8.reconstruction傅立叶系数重建轮廓')
-    print('9.area ratio获得重合面积比')
-    print('10.exist')
+    print('1.Picture division:')
+    print('2.Find contours:')
+    print('3.Resize:')
+    print('4.Rotation based on average:')
+    print('5.Get average contours:')
+    print('6.Rotation based on symmetric：')
+    print('7.Get EFDs:')
+    print('8.Contour reconstruction for different level of EFDs:')
+    print('9.Area ratio:')
+    print('10.Statistical EFDs format:')
+    print('11.Contour reconstruction for different genotypes:')
+    print('12.Exit:')
     print('-'*20)
     return
 
-#系统不退出，循环执行，直到选择6，才会退出系统
+#系统不退出，循环执行，直到选择11才会退出系统
 while True:
     #显示功能界面
     main()
     #输入选择的功能
-    function = int(input('choose the function you want(1-10):'))
+    function = int(input('choose the function you want(1-12):'))
     
     #功能匹配
     #当选择功能1：图片分割
     if function == 1:
         import division
-        input_path = input('input the route of origin picture:')
-        output_path = input('input the route of output picture:')
-        background_color = input('choose background color white,black or other(w/b/o):')
+        #print('#the "input_path" is the path of folder where images located')
+        input_path = input('input the folder of origin picture:')
+        output_path = input('input the folder of output picture:')
+        background_color = input('choose background color, white,black or other(w/b/o):')
         if background_color == 'w':
             division.white_division(input_path, output_path)
         elif background_color =='b':
@@ -42,35 +45,35 @@ while True:
     # 当选择功能2：轮廓提取
     elif function == 2:
         option = input('if you want to resize your pics in the same area:y/n')
-        background = input('choose the background of your pics(b/w/o):')
+        background = input('choose the background of your pics, white,black or other(w/b/o):')
 
         if option == 'n':
             if background == "b":
                 import contours
-                input_path = input('input the route of origin picture:')
-                output_path = input('input the route of output picture:')
+                input_path = input('input the folder of origin picture:')
+                output_path = input('input the folder of output picture:')
                 contours.black_background(input_path, output_path)
             elif background == "w":
                 import contours
-                input_path = input('input the route of origin picture:')
-                output_path = input('input the route of output picture:')
+                input_path = input('input the folder of origin picture:')
+                output_path = input('input the folder of output picture:')
                 contours.white_background(input_path, output_path)
             elif background == "o":
                 import contours
-                input_path = input('input the route of origin picture:')
-                output_path = input('input the route of output picture:')
+                input_path = input('input the folder of origin picture:')
+                output_path = input('input the folder of output picture:')
                 contours.other_background(input_path, output_path)
         elif option == 'y':
             import resize
-            input_path = input('input the route of origin picture:')
-            output_path = input('input the route of output picture:')
+            input_path = input('input the folder of origin picture:')
+            output_path = input('input the folder of output picture:')
             average_area = input('input the average area of output picture:')
             resize.black_background_resize(input_path, output_path,average_area)
 
     #当选择功能3，面积均一化
     elif function ==3:
         import resize
-        input_path = input('input the route of origin picture:')
+        input_path = input('input the folder of origin picture:')
         output_path = input('input the route of output picture:')
         average_area = int(input('input the average area of output picture:'))
         resize.resize(input_path, average_area, output_path)
@@ -78,48 +81,71 @@ while True:
     # 当选择功能4，图片根据均值旋转，进行角度矫正
     elif function == 4:
         import overlap_rotation as ra
-        input_path = input('input the route of origin picture:')
+        #average_path = input('input the folder of average picture:')
+        input_path = input('input the folder of origin picture:')
         output_path = input('input the route of output picture:')
         ra.average_rotation(input_path,output_path)
 
     # 当选择功能5，获得多张图片的平均轮廓
     elif function == 5:
         import average
-        input_path = input('input the route of origin picture:')
+        input_path = input('input the folder of origin picture:')
         output_path = input('input the route of output picture:')
         average.average_pic(input_path,output_path)
 
     # 当选择功能6，根据对称性矫正方向
     elif function == 6:
         import mean_rotation as mr
-        input_path = input('input the route of origin picture:')
+        input_path = input('input the folder of origin picture:')
         output_path = input('input the route of output picture:')
         mr.main(input_path,output_path)
 
     # 当选择功能7，求10级傅立叶系数
     elif function == 7:
         import efd
-        input_path = input('input the route of origin picture:')
+        input_path = input('input the folder of origin picture:')
         output_path = input('input the route of output csv:')
         efd.efd_batch(input_path,output_path)
 
     # 当选择功能8，根据傅立叶系数轮廓重建
     elif function == 8:
         import contours_reconstruction as cr
-        input_path = input('input the route of origin picture:')
+        input_path = input('input the folder of origin picture:')
         output_path = input('input the route of output picture:')
         cr.contour_reconstruction_batch_imgsave(input_path, output_path)
 
     # 当选择功能9，求重建轮廓和原图片的重叠百分比
     elif function == 9:
         import contours_reconstruction as cr
-        input_path = input('input the route of origin picture:')
+        input_path = input('input the folder of origin picture:')
         output_path = input('input the route of output csv:')
         cr.overlape(input_path,output_path)
         #cr.percent(input_path,output_path)
 
-    # 当选择功能10：退出系统
+    #整理参数为整个的表格
     elif function == 10:
+        import single
+        input_path = input('input the folder of tables:')
+        output_path = input('input the route of output csv:')
+        single.create_batch_parameters_csv(input_path,output_path)
+        #cr.percent(input_path,output_path)
+
+    # 不同傅里叶系数重建
+    elif function == 11:
+        import different_genotype as diff_geno
+        data_path = input('input the folder of origin picture:')
+        save_path = input('input the route of output folder:')
+        diff_geno.save(data_path, save_path)
+
+    #不同基因型的轮廓重建
+    elif function == 12:
+        import reconstruction as re
+        input_path = input('input the folder of origin picture:')
+        output_path = input('input the route of output folder:')
+        re.contour_reconstruction_batch_imgsave(input_path,output_path)
+
+    # 当选择功能13：退出系统
+    elif function == 13:
         exist_glag = input('are you sure to exist? y/n:')
         if exist_glag=='y':
             break
