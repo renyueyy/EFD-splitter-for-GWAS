@@ -35,17 +35,17 @@ def black_background(input_path,output_path):
 
             # 图片二值化，分别提取rgb三通道图片
             #ret, image_blue = cv.threshold(b, 75, 255, cv.THRESH_BINARY)
-            ret, image_blue = cv.threshold(b, 10, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)  # OSTU阈值
+            ret, image_blue = cv.threshold(b, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)  # OSTU阈值
             blue_gauss = cv.GaussianBlur(image_blue, (5, 5), 0)
             close_blue = cv.morphologyEx(blue_gauss, cv.MORPH_CLOSE, kenel)
 
             #ret, image_green = cv.threshold(g, 75, 255, cv.THRESH_BINARY)
-            ret, image_green = cv.threshold(g, 10, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)  # OSTU阈值
+            ret, image_green = cv.threshold(g, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)  # OSTU阈值
             green_gauss = cv.GaussianBlur(image_green, (5, 5), 0)
             close_green = cv.morphologyEx(green_gauss, cv.MORPH_CLOSE, kenel)
 
             #ret, image_red = cv.threshold(r, 75, 255, cv.THRESH_BINARY)
-            ret, image_red = cv.threshold(r, 10, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)  # OSTU阈值
+            ret, image_red = cv.threshold(r, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)  # OSTU阈值
             red_gauss = cv.GaussianBlur(image_red, (5, 5), 0)
             close_red = cv.morphologyEx(red_gauss, cv.MORPH_CLOSE, kenel)
 
