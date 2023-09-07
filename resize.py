@@ -16,25 +16,35 @@ def resize(input_path,area_average,output_path):
         os.makedirs(output_path)
     dir_list = os.listdir(input_path)#获得图片名称列表，作为循环列表
 
-    for m in dir_list:
-        os.chdir(input_path)
-        img = cv.imread(m, cv.IMREAD_GRAYSCALE)
-        # #读入平均面积，从black_background中继承得到
-        # area_average = 82971.08333333333
-        (cnts, add_image) = cv.findContours(img, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)  # 原图轮廓检测
-        area_img = 0  # 计算原图轮廓面积
-        for n in cnts:
-            area_img += cv.contourArea(n)
-        # print(area_img)
-        k2 = area_average / area_img  # 求resize面积的倍数
-        k = math.sqrt(k2)  # 开根号，边长更改的倍数是面积的开根号
+    dir_list = os.listdir(input_path)#获得图片名称列表，作为循环列表
+    for dir in dir_list:
+        dir_input = input_path+'/'+dir
+        pic_list = os.listdir(dir_input)
+        dir_output = output_path+'/'+dir
+        if not os.path.exists(dir_output):  # 建立输出文件夹
+            os.makedirs(dir_output)
 
-        h, w = img.shape  # 求resize面积后对边长
-        w_s = int(w * k)
-        h_s = int(h * k)
-        # img_resize = cv.resize(img, (w_s, h_s), fx=1, fy=1, interpolation=cv.INTER_AREA)
-        img_resize = cv.resize(img, (w_s, h_s), fx=1, fy=1, interpolation=cv.INTER_LINEAR)  # 重置图片
-        cv.imwrite(output_path + f"/{m}", img_resize)
+        for m in pic_list:
+            os.chdir(dir_input)
+            img = cv.imread(m, cv.IMREAD_GRAYSCALE)
+            # #读入平均面积，从black_background中继承得到
+            # area_average = 82971.08333333333
+            (cnts, add_image) = cv.findContours(img, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)  # 原图轮廓检测
+            area_img = 0  # 计算原图轮廓面积
+            for n in cnts:
+                area_img += cv.contourArea(n)
+            # print(area_img)
+            k2 = area_average / area_img  # 求resize面积的倍数
+            k = math.sqrt(k2)  # 开根号，边长更改的倍数是面积的开根号
+
+            h, w = img.shape  # 求resize面积后对边长
+            w_s = int(w * k)
+            h_s = int(h * k)
+            # img_resize = cv.resize(img, (w_s, h_s), fx=1, fy=1, interpolation=cv.INTER_AREA)
+            img_resize = cv.resize(img, (w_s, h_s), fx=1, fy=1, interpolation=cv.INTER_LINEAR)  # 重置图片
+            cv.imwrite(dir_output + f"/{m}", img_resize)
+
+
         
 def black_background_resize(input_path,output_path,area_average):
     """
