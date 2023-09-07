@@ -27,18 +27,27 @@ def average_pic(path,out_path):  # path为读取img_mean.jpg的文件夹名称�
     if not os.path.exists(out_path):#建立输出文件夹
         os.makedirs(out_path)
     jujuba_name_list = os.listdir(path)
-    img0 = cv.imread(os.path.join(path,jujuba_name_list[0]),cv.IMREAD_GRAYSCALE)
-    img_black = np.zeros_like(img0)
+
+
     #img_mean_mean = cv.cvtColor(img_mean_mean, cv.COLOR_RGB2GRAY)
     n = len(jujuba_name_list)
     for jujuba_name in jujuba_name_list:
-        img = cv.imread(os.path.join(path,jujuba_name), cv.IMREAD_GRAYSCALE)
-        img_black, img = fill_boundary(img_black, img)
-        img_black = img_black + (img / n)
+        img_black = np.zeros((1000, 1000, 3), np.uint8)
+        img_black.fill(0)  # 创建黑色画布
+        img_black = cv.cvtColor(img_black, cv.COLOR_RGB2GRAY)
 
-    _, img_black = cv.threshold(img_black, 127, 255, cv.THRESH_BINARY)
-    img_black = cv.medianBlur(img_black.astype(np.uint8), 5)
-    cv.imwrite(out_path + 'mean.jpg', img_black)
+        dir_input = path + '/' + jujuba_name
+        pic_list = os.listdir(dir_input)
+        for m in pic_list:
+            os.chdir(dir_input)
+            img = cv.imread(m, cv.IMREAD_GRAYSCALE)
+            #img = cv.imread(os.path.join(path, jujuba_name), cv.IMREAD_GRAYSCALE)
+            img_black, img = fill_boundary(img_black, img)
+            img_black = img_black + (img / n)
+
+        _, img_black = cv.threshold(img_black, 127, 255, cv.THRESH_BINARY)
+        img_black = cv.medianBlur(img_black.astype(np.uint8), 5)
+        cv.imwrite(out_path + '/'+f'{jujuba_name}', img_black)
     return img_black
 """
 def option1(path):
