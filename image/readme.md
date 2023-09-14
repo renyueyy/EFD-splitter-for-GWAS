@@ -1,0 +1,1 @@
+ - The images in this folder are examples of fruit outline treatments, including images with black and white backgrounds
