@@ -46,24 +46,6 @@ def average_pic(path,out_path):  # path为读取img_mean.jpg的文件夹名称�
             img_black = img_black + (img / n)
 
         _, img_black = cv.threshold(img_black, 127, 255, cv.THRESH_BINARY)
-        img_black = cv.medianBlur(img_black.astype(np.uint8), 5)
+        img_black = cv.medianBlur(img_black.astype(np.uint8), 15)
         cv.imwrite(out_path + '/'+f'{jujuba_name}', img_black)
     return img_black
-"""
-def option1(path):
-    folder_list = os.listdir(path)  # 遍历子文件夹，生成子文件夹列表
-    for folder in folder_list:  # 遍历文件夹
-        new_path = os.path.join(path, folder)  # 子文件夹路径
-        result = os.path.isdir(new_path)  # 判断输入文件夹下是否有文件夹
-        
-def option(input_path,output_path):
-    if not os.path.exists(output_path):#建立输出文件夹
-        os.makedirs(output_path)
-
-    folder_list = os.listdir(input_path)  # 遍历子文件夹，生成子文件夹列表
-    for folder in folder_list:  # 遍历文件夹
-        new_path = os.path.join(input_path, folder)  # 子文件夹路径
-        result = os.path.isdir(new_path)  # 判断输入文件夹下是否有文件夹
-        if str(result) == 'True':
-            1
-"""
