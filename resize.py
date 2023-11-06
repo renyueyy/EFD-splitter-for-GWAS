@@ -20,7 +20,7 @@ def resize(input_path,area_average,output_path):
     for dir in dir_list:
         dir_input = input_path+'/'+dir
         pic_list = os.listdir(dir_input)
-        dir_output = output_path+'/'+dir
+        dir_output = os.path.join(output_path, dir)
         if not os.path.exists(dir_output):  # 建立输出文件夹
             os.makedirs(dir_output)
 
@@ -114,5 +114,5 @@ def black_background_resize(input_path,output_path,area_average):
             h_s = int(h * k)
             # img_resize = cv.resize(img, (w_s, h_s), fx=1, fy=1, interpolation=cv.INTER_AREA)
             img_resize = cv.resize(blur, (w_s, h_s), fx=1, fy=1, interpolation=cv.INTER_LINEAR)  # 重置图片
-            cv.imwrite(dir_output + f"/{count}.jpg", img_resize)
+            cv.imwrite(os.path.join(dir_output, f"/{count}.jpg"), img_resize)
     return
