@@ -4,23 +4,23 @@ import os
 
 def distortion(img):
     # Load the image and convert to grayscale
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     # find Harris corners as we did in the previous blog
     gray = np.float32(gray)
-    dst = cv2.cornerHarris(gray, 2, 3, 0.04)
-    dst = cv2.dilate(dst, None)
-    ret, dst = cv2.threshold(dst, 0.01 * dst.max(), 255, 0)
+    dst = cv.cornerHarris(gray, 2, 3, 0.04)
+    dst = cv.dilate(dst, None)
+    ret, dst = cv.threshold(dst, 0.01 * dst.max(), 255, 0)
     dst = np.uint8(dst)
 
     # find centroids
-    ret, labels, stats, centroids = cv2.connectedComponentsWithStats(dst)
+    ret, labels, stats, centroids = cv.connectedComponentsWithStats(dst)
 
     # define the criteria to stop. We stop it after a specified number of iterations
     # or a certain accuracy is achieved, whichever occurs first.
-    criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 100, 0.001)
+    criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 100, 0.001)
 
     # Refine the corners using cv2.cornerSubPix()
-    corners = cv2.cornerSubPix(gray, np.float32(centroids), (5, 5), (-1, -1), criteria)
+    corners = cv.cornerSubPix(gray, np.float32(centroids), (5, 5), (-1, -1), criteria)
 
     # To display, first convert the centroids and corners to integer
     centroids = np.int0(centroids)
@@ -44,8 +44,12 @@ def black_division(input_path, output_path):
 
     for m in name_list:
         pic_path = os.path.join(input_path, m)
+        print(pic_path)
         img = cv.imread(pic_path)  # 读入图片
-        image = distortion(img)
+        try:
+            image = distortion(img)
+        except:
+            image = img
 
         pic_out_path = output_path+'/'+m+'/'#输出文件路径
         if not os.path.exists(pic_out_path):
