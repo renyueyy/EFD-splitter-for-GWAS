@@ -44,31 +44,25 @@ while True:
 
     # 当选择功能2：轮廓提取
     elif function == 2:
-        option = input('if you want to resize your pics in the same area:y/n')
-        background = input('choose the background of your pics, white,black or other(w/b/o):')
+        background = input('choose the background of your pics, white,black or other:white/black/other(w/b/o):')
 
-        if option == 'n':
-            if background == "b":
-                import contours
-                input_path = input('input the folder of origin picture:')
-                output_path = input('input the folder of output picture:')
-                contours.black_background(input_path, output_path)
-            elif background == "w":
+        if background == "b":
+            import contours
+            input_path = input('input the folder of origin picture:')
+            output_path = input('input the folder of output picture:')
+            contours.black_background(input_path, output_path)
+
+        elif background == "w":
                 import contours
                 input_path = input('input the folder of origin picture:')
                 output_path = input('input the folder of output picture:')
                 contours.white_background(input_path, output_path)
-            elif background == "o":
+
+        elif background == "o":
                 import contours
                 input_path = input('input the folder of origin picture:')
                 output_path = input('input the folder of output picture:')
                 contours.other_background(input_path, output_path)
-        elif option == 'y':
-            import resize
-            input_path = input('input the folder of origin picture:')
-            output_path = input('input the folder of output picture:')
-            average_area = input('input the average area of output picture:')
-            resize.black_background_resize(input_path, output_path,average_area)
 
     #当选择功能3，面积均一化
     elif function ==3:
@@ -130,22 +124,15 @@ while True:
         single.create_batch_parameters_csv(input_path,output_path)
         #cr.percent(input_path,output_path)
 
-    # 不同傅里叶系数重建
-    elif function == 11:
-        import different_genotype as diff_geno
-        data_path = input('input the folder of origin picture:')
-        save_path = input('input the route of output folder:')
-        diff_geno.save(data_path, save_path)
-
     #不同基因型的轮廓重建
-    elif function == 12:
+    elif function == 11:
         import reconstruction as re
-        input_path = input('input the folder of origin picture:')
+        input_path = input('input the route of genotype:')
         output_path = input('input the route of output folder:')
         re.contour_reconstruction_batch_imgsave(input_path,output_path)
 
     # 当选择功能13：退出系统
-    elif function == 13:
+    elif function == 12:
         exist_glag = input('are you sure to exist? y/n:')
         if exist_glag=='y':
             break

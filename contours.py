@@ -147,7 +147,7 @@ def other_background(input_path,output_path):
     return
 
 
-def white_background(input_path,output_path, option, area_average):
+def white_background(input_path,output_path, option):
     """
     #黑色背景下图片轮廓的提取
     :param input_division: 分割后图片的文件夹（只写到文件夹，每个文件夹内的图片在函数里循环读入）
@@ -184,7 +184,7 @@ def white_background(input_path,output_path, option, area_average):
             #gaussedge = cv.drawContours(contour, cnts, -1, (0, 255, 0), 2)  # 绘制轮廓
 
             blur = cv.medianBlur(close_green, 31)  # 中值滤波平滑边缘
-
+            """
             if option == "y":
                 area_img = 0
                 for n in cnts:
@@ -199,9 +199,11 @@ def white_background(input_path,output_path, option, area_average):
                 # img_resize = cv.resize(img, (w_s, h_s), fx=1, fy=1, interpolation=cv.INTER_AREA)
                 img_resize = cv.resize(blur, (w_s, h_s), fx=1, fy=1, interpolation=cv.INTER_LINEAR)  # 重置图片
                 cv.imwrite(os.path.join(dir_output, f"/{count}.jpg"), img_resize)
-
+            
             elif option == "n":
                 cv.imwrite(os.path.join(dir_output,"{}.jpg".format(m)), blur)
+            """
+            cv.imwrite(os.path.join(dir_output, "{}.jpg".format(m)), blur)
 
             # 计算轮廓面积
             areas = []
