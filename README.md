@@ -41,10 +41,8 @@ choose background color, white, black or other(w/b/o):b
 RGB-based contour acquisition of images requires a large difference between the object colour and the background colour, allowing for more accurate recognition.
 >You need to enter the path to the folder where the image is located and the path to the output folder. The pipeline will determine the output folder and automatically create a new one if it does not exist.
 
- - You can choose in this step whether you want area unification at the same time (**default area is 70,000 pixels**).
 ```
 choose the function you want(1-12):2
-if you want to resize your pics in the same area(y/n):n
 choose the background of your pics, white, black or other(w/b/o):b
 input the folder of origin picture:./demo/use_out
 input the folder of output picture:./demo/use_contour
@@ -104,8 +102,8 @@ Contour reconstruction based on multilevel Fourier coefficients.
  - Allows the profile to be fitted to the Fourier parameters.
 ```
 choose the function you want(1-12):8
-input the folder of origin picture:。/demo/use_rotation2
-input the route of output picture:。/demo/use_rconstruction
+input the folder of origin picture:./demo/use_rotation2
+input the route of output picture:./demo/use_rconstruction
 ```
 
 ## 9.Get area ratio
