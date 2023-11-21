@@ -26,18 +26,18 @@ class BBox(object):
 def average_pic(path,out_path):  # path为读取img_mean.jpg的文件夹名称，如bin_resize，bin_rotation，bin_rotation2
     if not os.path.exists(out_path):#建立输出文件夹
         os.makedirs(out_path)
-    jujuba_name_list = os.listdir(path)
-
+    name_list = os.listdir(path)
 
     #img_mean_mean = cv.cvtColor(img_mean_mean, cv.COLOR_RGB2GRAY)
-    n = len(jujuba_name_list)
-    for jujuba_name in jujuba_name_list:
+    n = len(name_list)
+    for name in name_list:
         img_black = np.zeros((1000, 1000, 3), np.uint8)
         img_black.fill(0)  # 创建黑色画布
         img_black = cv.cvtColor(img_black, cv.COLOR_RGB2GRAY)
 
-        dir_input = path + '/' + jujuba_name
+        dir_input = os.path.join(path,name)
         pic_list = os.listdir(dir_input)
+        print(pic_list)
         for m in pic_list:
             os.chdir(dir_input)
             img = cv.imread(m, cv.IMREAD_GRAYSCALE)
@@ -47,5 +47,6 @@ def average_pic(path,out_path):  # path为读取img_mean.jpg的文件夹名称�
 
         _, img_black = cv.threshold(img_black, 127, 255, cv.THRESH_BINARY)
         img_black = cv.medianBlur(img_black.astype(np.uint8), 15)
-        cv.imwrite(out_path + '/'+f'{jujuba_name}', img_black)
+        cv.imshow('img_black',img_black)
+        cv.imwrite(os.path.join(out_path, f'{name}'), img_black)
     return img_black
