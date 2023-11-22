@@ -92,7 +92,8 @@ while True:
         import mean_rotation as mr
         input_path = input('input the folder of origin picture:')
         output_path = input('input the route of output picture:')
-        mr.main(input_path,output_path)
+        direction = input('the direction of symmetry of the picture (horizontal/perpendicular):')
+        mr.main(input_path,output_path,direction)
 
     # 当选择功能7，求10级傅立叶系数
     elif function == 7:
