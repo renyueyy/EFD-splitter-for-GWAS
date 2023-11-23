@@ -4,15 +4,15 @@ import pandas as pd
 
 
 def get_single_parameters(name, n, input):  # name为品种图片名字，如1-1(L1-1).jpg，n为要获取的参数为1-20
-    #coeffs_path = os.path.join('./rsz_images', name, 'efd.csv')
+    #coeffs_path = os.path.join('./rsz_221images', name, 'efd.csv')
     coeffs_path = input + f'/{name}'#输入文件所在文件夹
     coeffs = np.loadtxt(coeffs_path, delimiter=',')
-    coeffs = coeffs.reshape((-1))
-    return coeffs[n - 1]
+    coeffs = coeffs.reshape((-1))#改成一行
+    return coeffs[n-1]
 
 
 def parameters_conversion(parameters):  # parameters为参数名称，如a1，b1，c1等
-    n = 4 * (eval(parameters[1]) - 1) + ord(parameters[0]) - 96
+    n = 4 * (eval(parameters[1:]) - 1) + ord(parameters[0]) - 96
     return n
 
 
