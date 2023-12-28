@@ -1,4 +1,4 @@
-# EFD-spliter-for-GWAS
+# EFD-splitter-for-GWAS
 
 Contour extraction and Fourier parameter analysis of images containing objects.  
 We wrote this pipeline to perform simple processing of images containing fruit and to perform Fourier parameter extraction and mathematical analysis.  
